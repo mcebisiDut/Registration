@@ -1,0 +1,56 @@
+Api will be responsible for handling the events whilst Services will handle commands
+
+Add configuration to 'Common' project to use RawRabbit
+    Create Service and it's interface in 'Common' project 
+        (This will allow us to subscribeto messages)
+
+	HostBuilder 
+		is more like a factory method
+		do configurations and load environment variables and commandline arguments and build
+	
+	create web hostBuilder 
+		this will create a host builder which takes arguments,
+		configurations and startup class
+
+	builderBase (an abstract method)
+		which will contain a single method of ServiceHost type
+
+	On HostBuilder 
+		you override the ServiceHost build method which will take WebHost and 
+		BusClient which is responsible for establishing the connection to rabbitMq 
+		(which sends and subscribes to messages being sent to the bus client)
+
+	Services on StartUp is our IoC container
+
+	BusBuilder 
+		class will use RabbitMq
+		Will provide a way to subscribe to message in a fluent way using commands and 
+		events.
+		Here will resolve commandHandler of particular command type
+
+	Extension: 
+		This will implements the methods to subscribe to Events and Commands
+		will be our helper methods (These methods will return a task) which
+		take in a busClient and a Handler(Event/Command), this will subscribe
+		to a given type using rawRabbit library and we will handle our message
+		and using our context, we'll use configurations from declared queue
+		using queue name which will allow services to subscribe to messages using
+		the same name
+
+	AddRabbitMq 
+		Create rabbitMq section for configurations in the API for connection to the
+		service bus. RabbitMqOptions will bind the configuration to that class
+		GetSection(RabbitMq) which comes from configuration's section
+		AddSingleton for RawRabbit to manage connection
+
+	Api StartUp
+		Add rabbitMq to configure the service bus and establish connection
+		register EventHandler
+
+	Program.cs
+		ServiceHost will will grab the eventHandler from services register in StartUp(IoC)
+		and subscribe to it and invoke the eventHandler if it's found else it will
+		throw and exception
+
+	RegisterUserHandler 
+		Will take the bus client which will produce the event

@@ -16,11 +16,12 @@ namespace Sales.Api
     {
         public static void Main(string[] args)
         {
-            ServiceHost.Create<Startup>(args)
-                        .UseRabbitMq()
-                        .SubscribeToEvent<UserRegistered>()
-                        .Build()
-                        .Run();
+            ServiceHost
+                .Create<Startup>(args)
+                .UseRabbitMq()
+                .SubscribeToEvent<UserRegistered>()
+                .Build()
+                .Run();
         }
     }
 }

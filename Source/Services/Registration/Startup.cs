@@ -31,7 +31,7 @@ namespace Registration
         {
             services.AddMvc();
             services.AddRabbitMq(Configuration);
-            services.AddScoped<ICommandHandler<RegisterUser>, RegisterUserCommand>();
+            services.AddScoped<ICommandHandler<RegisterUser>, RegisterUserHandler>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -3,19 +3,23 @@ using Common.Commands;
 using Microsoft.AspNetCore.Mvc;
 using RawRabbit;
 
-namespace Sales.Api.Controllers {
+namespace Sales.Api.Controllers
+{
     [Route("[controller]")]
-    public class UsersController : Controller {
+    public class UsersController : Controller
+    {
         private readonly IBusClient _busClient;
-        public UsersController (IBusClient busClient) {
+        public UsersController(IBusClient busClient)
+        {
             _busClient = busClient;
         }
 
-        [HttpPost ("register")]
-        public async Task<IActionResult> Post ([FromBody] RegisterUser command) {
-            await _busClient.PublishAsync (command);
+        [HttpPost("register")]
+        public async Task<IActionResult> Post([FromBody] RegisterUser command)
+        {
+            await _busClient.PublishAsync(command);
 
-            return Accepted ();
+            return Accepted();
         }
     }
 }

@@ -23,14 +23,14 @@ namespace Common.Services
         {
             Console.Title = typeof(TStartup).Namespace;
             var config = new ConfigurationBuilder()
-                .AddEnvironmentVariables()
-                .AddCommandLine(args)
-                .Build();
+                                .AddEnvironmentVariables()
+                                .AddCommandLine(args)
+                                .Build();
 
             var webHostBuilder = WebHost
-                .CreateDefaultBuilder(args)
-                .UseConfiguration(config)
-                .UseStartup<TStartup>();
+                                    .CreateDefaultBuilder(args)
+                                    .UseConfiguration(config)
+                                    .UseStartup<TStartup>();
 
             return new HostBuilder(webHostBuilder.Build());
         }
@@ -75,8 +75,8 @@ namespace Common.Services
             public BusBuilder SubscribeToCommand<TCommand>() where TCommand : ICommand
             {
                 var handler = (ICommandHandler<ICommand>)_webHost
-                    .Services
-                    .GetService(typeof(ICommandHandler<ICommand>));
+                                                        .Services
+                                                        .GetService(typeof(ICommandHandler<ICommand>));
 
                 _bus.WithCommandHandlerAsync(handler);
 
@@ -86,8 +86,8 @@ namespace Common.Services
             public BusBuilder SubscribeToEvent<TEvent>() where TEvent : IEvent
             {
                 var handler = (IEventHandler<IEvent>)_webHost
-                    .Services
-                    .GetService(typeof(IEventHandler<IEvent>));
+                                                    .Services
+                                                    .GetService(typeof(IEventHandler<IEvent>));
 
                 _bus.WithEventHandlerAsync(handler);
 

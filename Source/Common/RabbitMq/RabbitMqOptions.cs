@@ -4,6 +4,5 @@ namespace Common.RabbitMq
 {
     public class RabbitMqOptions : RawRabbitConfiguration
     {
-
     }
 }

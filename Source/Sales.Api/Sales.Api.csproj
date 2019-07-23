@@ -11,6 +11,14 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.2" PrivateAssets="All" />
+    <PackageReference Include="RawRabbit" Version="2.0.0-beta8" />
+    <PackageReference Include="RawRabbit.DependencyInjection.ServiceCollection" Version="2.0.0-beta8" />
+    <PackageReference Include="RawRabbit.Operations.Publish" Version="2.0.0-beta8" />
+    <PackageReference Include="RawRabbit.Operations.Subscribe" Version="2.0.0-beta8" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.0" />
   </ItemGroup>
 
   <ItemGroup>

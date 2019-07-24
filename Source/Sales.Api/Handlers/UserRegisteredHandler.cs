@@ -22,7 +22,7 @@ namespace Sales.Api.Handlers
         {
             try
             {
-                await Task.CompletedTask;
+                await _bus.PublishAsync(new UserRegistered(@event.Email, @event.FirstName, @event.LastName));
                 _logger.LogInformation($"User registered: {@event.FirstName}");
             }
             catch (RegistrationException exception)

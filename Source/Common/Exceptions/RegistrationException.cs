@@ -9,7 +9,7 @@ namespace Common.Exceptions
         {
         }
 
-        public RegistrationException(string code):base(code)
+        public RegistrationException(string code) : base(code)
         {
             Code = code;
         }

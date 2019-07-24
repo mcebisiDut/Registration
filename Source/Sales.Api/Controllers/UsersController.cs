@@ -19,7 +19,7 @@ namespace Sales.Api.Controllers
         {
             await _busClient.PublishAsync(command);
 
-            return Accepted();
+            return Accepted($"Users/{command.FirstName}");
         }
     }
 }

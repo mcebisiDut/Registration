@@ -20,10 +20,11 @@ namespace Registration.Handlers
         }
         public async Task HandleAsync(RegisterUser command)
         {
+            _logger.LogInformation($"Registering user: {command.FirstName}");
             try
             {
-                _logger.LogInformation($"Registering user: {command.FirstName}");
                 await _bus.PublishAsync(new UserRegistered(command.Email, command.FirstName, command.LastName));
+                _logger.LogInformation($"User: {command.FirstName} was registered");
             }
             catch (RegistrationException exception)
             {

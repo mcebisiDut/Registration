@@ -11,7 +11,7 @@ namespace Sales.Api.Handlers
     public class UserRegisteredHandler : IEventHandler<UserRegistered>
     {
         private readonly IBusClient _bus;
-        private readonly ILogger<UserRegisteredHandler> _logger;
+        private readonly ILogger _logger;
 
         public UserRegisteredHandler(IBusClient bus,ILogger<UserRegisteredHandler> logger)
         {
@@ -22,7 +22,7 @@ namespace Sales.Api.Handlers
         {
             try
             {
-                await _bus.PublishAsync(new UserRegistered(@event.Email, @event.FirstName, @event.LastName));
+                await Task.CompletedTask;
                 _logger.LogInformation($"User registered: {@event.FirstName}");
             }
             catch (RegistrationException exception)

@@ -12,7 +12,7 @@ namespace Registration.Handlers
     public class RegisterUserHandler : ICommandHandler<RegisterUser>
     {
         private readonly IBusClient _bus;
-        private readonly ILogger<RegisterUserHandler> _logger;
+        private readonly ILogger _logger;
         public RegisterUserHandler(IBusClient bus, ILogger<RegisterUserHandler> logger)
         {
             _bus = bus;
@@ -25,6 +25,8 @@ namespace Registration.Handlers
             {
                 await _bus.PublishAsync(new UserRegistered(command.Email, command.FirstName, command.LastName));
                 _logger.LogInformation($"User: {command.FirstName} was registered");
+
+                return;
             }
             catch (RegistrationException exception)
             {
